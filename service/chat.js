@@ -41,5 +41,5 @@ exports.main = function(req, res){
 	now.setHours(now.getHours() + 24);
 	var tokenStr = '{"username":'+new Date().getTime()+',"expiryTime":'+now.getTime()+',"client":"'+client+'"}';
 	res.cookie('token',secretUtil.aesEncode(tokenStr,config.cookie.password),'/');
-	res.render('chat');
+	res.render(agent.Mobile ? 'chat-m' : 'chat');
 };
