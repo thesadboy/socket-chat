@@ -1,0 +1,9 @@
+{
+	"cookie" : {
+		"password" : "socket-password",
+		"secret" : "socket-secret"
+	},
+	"socket" : {
+		"offline_timeout" : 10000
+	}
+}
