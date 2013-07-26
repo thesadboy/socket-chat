@@ -38,8 +38,10 @@ exports.main = function(req, res){
 		}
 	}
 	var now = new Date();
+	var user = now.getTime();
 	now.setHours(now.getHours() + 24);
-	var tokenStr = '{"username":'+new Date().getTime()+',"expiryTime":'+now.getTime()+',"client":"'+client+'"}';
+	var tokenStr = '{"username":'+user+',"expiryTime":'+now.getTime()+',"client":"'+client+'"}';
 	res.cookie('token',secretUtil.aesEncode(tokenStr,config.cookie.password),'/');
+	res.cookie('username',user,'/');
 	res.render(agent.Mobile ? 'chat-m' : 'chat');
 };

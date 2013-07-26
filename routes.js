@@ -1,7 +1,5 @@
-var chat = require('./service/chat')
+var chat = require('./service/chat');
+var main = require('./service/main');
 exports.router = function(app){
-	app.get('/',function(req,res){
-		res.send('ok');
-	});
-	app.get('/chat',chat.main);
+	app.get('/',chat.main);
 };

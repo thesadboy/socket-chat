@@ -1,6 +1,15 @@
 extends layout
 
 block content
+	link(rel='stylesheet',href='/css/chat.css')
 	script(type='text/javascript', src='/socket.io/socket.io.js')
 	script(type='text/javascript', src='/js/socket.js')
-	h1 Socket.io Test
+	script(type='text/javascript', src='/js/chat.js')
+	div#chat-frame
+		div#chat-left
+			div#system-msg
+		div#chat-right
+			div#chat-user-toggle
+				div#chat-user-toggle-btn 好友列表
+			div#chat-user-list
+				ul#list
