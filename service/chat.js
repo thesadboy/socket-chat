@@ -4,7 +4,6 @@ var secretUtil = require('../utils/secret-util');
 
 exports.main = function(req, res){
 	var agent = ua(req.headers['user-agent']);
-	console.log(agent);
 	var client;
 	if(agent.Mobile)
 	{
@@ -27,11 +26,7 @@ exports.main = function(req, res){
 	{
 		if(agent.Mac)
 		{
-			client = 'MAC';
-		}
-		else if(agent.Mac && agent.Windows)
-		{
-			client = 'PC';
+			client = agent.windows ? 'PC' : 'MAC';
 		}
 		else
 		{
