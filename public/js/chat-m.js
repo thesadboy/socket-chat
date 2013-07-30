@@ -5,7 +5,6 @@ $(function () {
 	});
 	//iscroll
 	myscroll = new iScroll('chat-user-list');
-	console.log(myscroll);
 	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 });
 var listUser = function(userList) {
