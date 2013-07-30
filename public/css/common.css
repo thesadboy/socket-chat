@@ -3,3 +3,12 @@ body{ font-size: 14px; font-weight: normal; color: #333; }
 ul, li{ list-style: none; }
 a { color: #08C; text-decoration: none; }
 a:hover, a:focus { color: #005580; text-decoration: underline; }
+.btn{ border: none; padding: 8px 16px; margin: 5px; border-radius: 4px; display: inline-block; cursor: pointer; text-align: center; color: #333; text-shadow: 0 1px 1px white; background: #E7E7E7; background: -moz-linear-gradient(top, #E7E7E7 0%, #DFDFDF 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E7E7E7), color-stop(100%,#DFDFDF)); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.5) inset; }
+.btn:first-child{margin-left: 0;}
+.btn:last-child{margin-right: 0;}
+.input-error{border-color:#f66234 !important; }
+.msg-error{margin-top: 10px; color: #f66234; display: block;}
+.btn:hover{text-decoration: none;background:white; background: -moz-linear-gradient(top, white 0%, #EBEBEB 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,white), color-stop(100%,#EBEBEB));}
+.btn-dark{ color: white; text-shadow: 0 1px 1px black; background: #2C2C2C; background: -moz-linear-gradient(top, #2C2C2C 0%, #222 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2C2C2C), color-stop(100%,#222)); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.1) inset; }
+.btn-dark:hover{color: white; background: #444; background: -moz-linear-gradient(top, #444 0%, #333 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#444), color-stop(100%,#333)); }
+.pull-right{float: right;}

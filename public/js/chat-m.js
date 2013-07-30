@@ -13,9 +13,8 @@ var listUser = function(userList) {
 var sayToSomeone = function() {};
 var sayToAll = function() {};
 var systemMsg = function(msg) {
-	var oHtml = $('<marquee direction="left" behaviour="lide" loop="1" scrollamount="5"></marquee>');
-	oHtml.append(msg);
-	$('#system-msg').empty().append(oHtml);
+	var message = new Message({msg : msg});
+	message.show();
 };
 var getMsg = function(data) {
 	console.log(data);
@@ -32,4 +31,34 @@ var onlineStatus = function(msg) {
 		html = '[系统]用户"' + msg.user + '"离开聊天室';
 	}
 	systemMsg(html);
+};
+
+/*
+ *以下为一些控件
+ **/
+var Message = function(options) {
+	var defaults = {
+		msg: 'Message Box',
+		timeout: 1500
+	};
+	this.options = $.extend(defaults, options);
+};
+Message.prototype.setMsg = function(msg) {
+	this.options.msg = msg;
+}
+Message.prototype.setTimeout = function(timeout) {
+	this.options.timeout = timeout;
+};
+Message.prototype.show = function() {
+	var $this = this;
+	var msg = $('<div class="message"></div>');
+	msg.html($this.options.msg);
+	$(document.body).append(msg);
+	msg.fadeIn(function() {
+		setTimeout(function() {
+			msg.fadeOut(function() {
+				msg.remove();
+			});
+		}, $this.options.timeout);
+	});
 };

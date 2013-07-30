@@ -1,6 +1,13 @@
 extends layout-m
 
 block content
+	link(rel='stylesheet',href='/css/chat-m.css')
 	script(type='text/javascript', src='/socket.io/socket.io.js')
+	script(type='text/javascript', src='/js/chat-m.js')
 	script(type='text/javascript', src='/js/socket.js')
-	h1 Socket.io Test(Mobile)
+	div#chat-frame
+		div#chat-top
+		div#chat-bottom
+			div#chat-editor
+				div#chat-editor-content(contentEditable='true')
+			div#chat-btn-send.btn 发送
