@@ -6,7 +6,7 @@
 #chat-user-toggle-btn{ position: absolute; top: 50%; margin-top: -38px; left: 0; right: 0; text-align: center; background: #ccc; padding: 10px 2px 10px 3px; border-radius: 10px 0 0 10px; font-weight: bold; }
 #chat-user-list{ position: absolute; left: 0; top: 0; right: 0; bottom: 0; border:1px solid #ccc; border-radius: 5px 0 0 5px; padding: 10px; }
 #chat-user-list #list li{ height: 30px; line-height: 30px; position: relative; border-bottom: 1px solid #eee; margin-bottom: 5px; }
-#chat-user-list #list li a{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; float: left; width: 215px; }
-#chat-user-list #list li img{ float: right; height: 100%; }
+#chat-user-list #list li a{ position: absolute; right: 35px; height: 100%;  left: 0;;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#chat-user-list #list li img{ position: absolute; right: 0; width: 30px; height: 100%; }
 /*system message*/
 #system-msg{ position: absolute; left: 0; top: 0; right: 0; height: 30px; background: whiteSmoke; line-height: 30px; padding: 0px 10px; font-weight: bold; color: #B94A48; }

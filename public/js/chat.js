@@ -2,6 +2,10 @@ var listUser = function(userList) {
 	//列出用户列表
 	var aHtml = []
 	for (var i = 0; i < userList.length; i++) {
+		if(userList[i].username === $.cookie('username'))
+		{
+			continue;
+		}
 		aHtml.push('<li>');
 		aHtml.push('<a href="javascript:" title="' + userList[i].username + '">' + userList[i].username + '</a>');
 		aHtml.push('<img src="/img/' + userList[i].client + '.png" title="' + userList[i].client + '登录"/>');

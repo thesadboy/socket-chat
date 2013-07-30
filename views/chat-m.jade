@@ -3,6 +3,7 @@ extends layout-m
 block content
 	link(rel='stylesheet',href='/css/chat-m.css')
 	script(type='text/javascript', src='/socket.io/socket.io.js')
+	script(type='text/javascript', src='/js/iscroll-lite.js')
 	script(type='text/javascript', src='/js/chat-m.js')
 	script(type='text/javascript', src='/js/socket.js')
 	div#chat-frame
@@ -11,3 +12,8 @@ block content
 			div#chat-editor
 				div#chat-editor-content(contentEditable='true')
 			div#chat-btn-send.btn 发送
+		div#chat-right
+			div#chat-user-toggle
+				div#chat-user-toggle-btn
+			div#chat-user-list
+				ul#scroller

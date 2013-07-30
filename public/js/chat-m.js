@@ -1,14 +1,29 @@
+var myscroll;
+$(function () {
+	$('#chat-user-toggle-btn').click(function (e) {
+		$('#chat-right').toggleClass('chat-right-show');
+	});
+	//iscroll
+	myscroll = new iScroll('chat-user-list');
+	console.log(myscroll);
+	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+});
 var listUser = function(userList) {
 	//列出用户列表
 	var aHtml = []
 	for (var i = 0; i < userList.length; i++) {
+		if(userList[i].username === $.cookie('username'))
+		{
+			continue;
+		}
 		aHtml.push('<li>');
 		aHtml.push('<a href="javascript:" title="' + userList[i].username + '">' + userList[i].username + '</a>');
 		aHtml.push('<img src="/img/' + userList[i].client + '.png" title="' + userList[i].client + '登录"/>');
 		aHtml.push('</li>');
 	}
 	var oHtml = $(aHtml.join(''));
-	$('#chat-user-list #list').empty().append(oHtml);
+	$('#chat-user-list #scroller').empty().append(oHtml);
+	myscroll.refresh();
 };
 var sayToSomeone = function() {};
 var sayToAll = function() {};

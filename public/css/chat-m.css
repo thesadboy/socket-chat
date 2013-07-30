@@ -1,16 +1,22 @@
-#chat-frame{ position: absolute; left: 0; top: 0; right: 0; bottom: 0;}
+#chat-frame{ position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden;}
 #chat-top{position: absolute; left: 0; right: 0; top: 0; bottom: 40px;}
 #chat-bottom{position: absolute; left: 0; right: 0; bottom: 0; height: 40px; background: #333;}
 #chat-editor{position: absolute; left: 5px; top: 5px; right: 70px; bottom: 5px; background: #fff; border-radius: 5px; }
 #chat-editor-content{position: absolute; left: 3px; right: 3px; top: 3px; bottom: 3px; outline: none; overflow-y: auto;}
 #chat-btn-send{margin: 0; padding: 0; position: absolute; right: 5px; bottom: 5px; top: 5px; height: 30px; width: 60px; text-align: center; line-height: 30px; font-size: 16px;}
-.message{position: fixed; top: 0; left: 0; right: 0; min-height: 25px; border-radius: 0 0 5px 5px; background: #666; color: #fff; text-align: center; line-height: 25px; z-index: 999px;}
+.message{position: fixed; top: 0; left: 0; right: 0; min-height: 25px; background: #666; color: #fff; text-align: center; line-height: 25px; z-index: 999;}
 /*user list*/
-#chat-user-toggle{ position: absolute; left: -25px; top: 0; bottom: 0; width: 25px; }
-#chat-user-toggle-btn{ position: absolute; top: 50%; margin-top: -38px; left: 0; right: 0; text-align: center; background: #ccc; padding: 10px 2px 10px 3px; border-radius: 10px 0 0 10px; font-weight: bold; }
-#chat-user-list{ position: absolute; left: 0; top: 0; right: 0; bottom: 0; border:1px solid #ccc; border-radius: 5px 0 0 5px; padding: 10px; }
-#chat-user-list #list li{ height: 30px; line-height: 30px; position: relative; border-bottom: 1px solid #eee; margin-bottom: 5px; }
-#chat-user-list #list li a{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; float: left; width: 215px; }
-#chat-user-list #list li img{ float: right; height: 100%; }
+#chat-right{position: absolute; right: -60%; top: 0; bottom: 40px; width: 60%; z-index: 10; -webkit-transition: all .3s linear;
+   -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+     -o-transition: all .3s linear;
+        transition: all .3s linear;}
+.chat-right-show{right: 0 !important;}
+#chat-user-toggle{ position: absolute; left: -10px; top: 0; bottom: 0; width: 10px; }
+#chat-user-toggle-btn{ position: absolute; top: 50%; height: 50px; margin-top: -25px; left: 0; right: 0; text-align: center; background: #ccc; border-radius: 5px 0 0 5px; cursor: pointer;}
+#chat-user-list{ position: absolute; left: 0; top: 0; right: 0; bottom: 0; border:1px solid #ccc; border-radius: 5px 0 0 5px; padding: 10px; overflow: auto;}
+#chat-user-list #scroller li{ height: 30px; line-height: 30px; position: relative; border-bottom: 1px solid #eee; margin-bottom: 5px; }
+#chat-user-list #scroller li a{ position: absolute; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; left: 0; height: 30px; right: 35px; }
+#chat-user-list #scroller li img{ position: absolute; height: 100%; width: 30px; right: 0;}
 /*system message*/
 #system-msg{ position: absolute; left: 0; top: 0; right: 0; height: 30px; background: whiteSmoke; line-height: 30px; padding: 0px 10px; font-weight: bold; color: #B94A48; }

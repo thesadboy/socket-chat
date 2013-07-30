@@ -85,6 +85,7 @@ var userList = function() {
 			client: clients[i].client
 		});
 	}
+	userList.reverse();
 	io.sockets.emit('userlist', userList);
 };
 var sayToSomone = function(from, to, msg){
