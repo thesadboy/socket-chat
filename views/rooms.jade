@@ -1,0 +1,29 @@
+extends layout
+
+block content
+	link(rel='stylesheet',href='/css/rooms.css')
+	script(type='text/javascript', src='/js/rooms.js')
+	div#header WUCHAT|房间列表
+	div#rooms
+		ul
+			li.room
+				a(href='/chat/聊天室1')
+					div.pic
+						img(src='/img/rooms/test.png')
+					div.desc
+						div.title 聊天室1
+						div.intro 聊天室1的简介聊天室1的简介聊天室1的简介聊天室1的简介聊天室1的简介聊天室1的简介
+			li.room
+				a(href='/chat/聊天室2')
+					div.pic
+						img(src='/img/rooms/test.png')
+					div.desc
+						div.title 聊天室2
+						div.intro 聊天室2的简介聊天室2的简介聊天室2的简介聊天室2的简介聊天室2的简介聊天室2的简介
+			li.room
+				a(href='/chat/聊天室3')
+					div.pic
+						img(src='/img/rooms/test.png')
+					div.desc
+						div.title 聊天室3
+						div.intro 聊天室3的简介聊天室3的简介

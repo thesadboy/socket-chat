@@ -29,33 +29,40 @@ exports.socketUtil = function(socketIo) {
 	io.on('connection', function(socket) {
 		socket.cookie = cookieUtil.cookieParse(socket.manager.handshaken[socket.id].headers.cookie);
 		var token = JSON.parse(secretUtil.aesDecode(socket.cookie.token, config.cookie.password));
-		if (!clients[token.username]) {
+		if (!clients[token.username + '@' + token.room]) {
 			//发送上线广播
-			onlineStatus(token.username,'ONLINE');
+			onlineStatus(token,'ONLINE');
+			//通知进入自己进入房间
+			getInRoom(socket);
 		}
-		clients[token.username] = {
+		socket.join(token.room);
+		clients[token.username + '@' + token.room] = {
+			username : token.username,
 			socket: socket,
-			client: token.client
+			client: token.client,
+			room : token.room
 		};
 		//更新用户列表
-		userList();
+		userList(token.room);
 		//删除待下线用户列表的该条记录
-		delete lostClients[token.username];
+		delete lostClients[token.username + '@' + token.room];
 		//自动重连
 		socket.on('reconnect', function() {
-			clients[token.username] = {
+			clients[token.username + '@' + token.room] = {
+				username : token.username,
+				room : token.room,
 				socket: socket,
 				client: token.client
 			};
 			//删除待下线用户列表的该条记录
-			delete lostClients[token.username];
+			delete lostClients[token.username + '@' + token.room];
 		});
 		socket.on('disconnect', function() {
 			//添加到待下线列表中
-			lostClients[token.username] = clients[token.username];
+			lostClients[token.username + '@' + token.room] = clients[token.username + '@' + token.room];
 			//在设定的时间内还未重新连接的视为下线
 			setTimeout(function() {
-				offline(token.username);
+				offline(token);
 			}, config.socket.offline_timeout);
 		});
 		socket.on('single',function(data){
@@ -66,27 +73,30 @@ exports.socketUtil = function(socketIo) {
 		});
 	});
 };
-var offline = function(user) {
-	if (lostClients[user]) {
-		delete lostClients[user];
-		delete clients[user];
-		console.warn('User "%s" offline.', user);
+var offline = function(token) {
+	if (lostClients[token.username + '@' + token.room]) {
+		delete lostClients[token.username + '@' + token.room];
+		delete clients[token.username + '@' + token.room];
+		console.warn('User "%s" offline from room "%s".', token.username, token.room);
 		//发送下线广播
-		onlineStatus(user,'OFFLINE');
+		onlineStatus(token,'OFFLINE');
 		//更新用户列表
-		userList();
+		userList(token.room);
 	}
 };
-var userList = function() {
+var userList = function(room) {
 	var userList = [];
 	for (i in clients) {
-		userList.push({
-			username: i,
-			client: clients[i].client
-		});
+		if(clients[i].room === room)
+		{
+			userList.push({
+				username: clients[i].username,
+				client: clients[i].client
+			});
+		}
 	}
 	userList.reverse();
-	io.sockets.emit('userlist', userList);
+	io.sockets.in(room).emit('userlist', userList);
 };
 var sayToSomone = function(from, to, msg){
 	clients[to].emit('single',{
@@ -105,9 +115,12 @@ var systemMsg = function(msg){
 		msg : msg
 	});
 };
-var onlineStatus = function(user, status){
-	io.sockets.emit('status',{
-		user : user,
+var onlineStatus = function(token, status){
+	io.sockets.in(token.room).emit('status',{
+		user : token.username,
 		status : status
 	});
+};
+var getInRoom = function(socket){
+	socket.emit('joinin');
 };

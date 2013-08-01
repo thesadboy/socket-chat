@@ -3,6 +3,9 @@ socket.on('connect', function() {
 	socket.on('status', function(data) {
 		onlineStatus(data);
 	});
+	socket.on('joinin', function(){
+		onlineStatus({isself: true});
+	});
 	socket.on('userlist', function(data) {
 		//在线列表[{username:'', client''}]
 		listUser(data);

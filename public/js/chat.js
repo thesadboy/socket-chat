@@ -8,7 +8,7 @@ var listUser = function(userList) {
 		}
 		aHtml.push('<li>');
 		aHtml.push('<a href="javascript:" title="' + userList[i].username + '">' + userList[i].username + '</a>');
-		aHtml.push('<img src="/img/' + userList[i].client + '.png" title="' + userList[i].client + '登录"/>');
+		aHtml.push('<img src="/img/clients/' + userList[i].client + '.png" title="' + userList[i].client + '登录"/>');
 		aHtml.push('</li>');
 	}
 	var oHtml = $(aHtml.join(''));
@@ -26,14 +26,17 @@ var getMsg = function(data) {
 };
 var onlineStatus = function(msg) {
 	var html = '';
-	if (msg.status == 'ONLINE') {
-		if (msg.user == $.cookie('username')) {
+	if(msg.isself)
+	{
 			html = '[系统]您已经进入聊天室';
+	}
+	else
+	{
+		if (msg.status == 'ONLINE') {
+				html = '[系统]用户"' + msg.user + '"进入聊天室';
 		} else {
-			html = '[系统]用户"' + msg.user + '"进入聊天室';
+			html = '[系统]用户"' + msg.user + '"离开聊天室';
 		}
-	} else {
-		html = '[系统]用户"' + msg.user + '"离开聊天室';
 	}
 	systemMsg(html);
 };

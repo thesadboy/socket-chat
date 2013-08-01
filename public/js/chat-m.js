@@ -17,7 +17,7 @@ var listUser = function(userList) {
 		}
 		aHtml.push('<li>');
 		aHtml.push('<a href="javascript:" title="' + userList[i].username + '">' + userList[i].username + '</a>');
-		aHtml.push('<img src="/img/' + userList[i].client + '.png" title="' + userList[i].client + '登录"/>');
+		aHtml.push('<img src="/img/clients/' + userList[i].client + '.png" title="' + userList[i].client + '登录"/>');
 		aHtml.push('</li>');
 	}
 	var oHtml = $(aHtml.join(''));

@@ -22,6 +22,10 @@ app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(req, res, next) {
+	res.locals.title = null;
+	next();
+});
 
 // development only
 if ('development' == app.get('env')) {

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	link(rel='stylesheet',href='/css/login.css')
+	script(type='text/javascript', src='/js/login.js')
+	div#login-box
+		div#login-title 请输入用户名以进入房间“#{room}”聊天
+		div#login-content
+			form#login-from(method='post', action='/login')
+				input(type='hidden', name='room', value=room)
+				div.form-row
+					label(for='login-username') 用户名
+					input#login-username(type='text',name='username',placeholder='请输入用户名')
+				div.form-row
+					label(for='login-password') 密码
+					input#login-password(type='password',name='password',placeholder='请输入用户密码（暂不需要）')
+				div.form-row
+					button.btn#login-submit(type='button') 进入聊天
+					button.btn.btn-dark#login-back(type='button') 返回

@@ -2,7 +2,29 @@ var ua = require('mobile-agent');
 var config = require('../config');
 var secretUtil = require('../utils/secret-util');
 
-exports.main = function(req, res){
+
+exports.main = function(req, res, next)
+{
+	var room  = req.params.room;
+	var agent = ua(req.headers['user-agent']);
+	var 	token = JSON.parse(secretUtil.aesDecode(req.cookies.token, config.cookie.password));
+	token.room = room;
+	res.cookie('token',secretUtil.aesEncode(JSON.stringify(token),config.cookie.password),'/');
+	res.render(agent.Mobile ? 'chat-m' : 'chat',{
+		title : '房间：' + room
+	});
+};
+
+exports.rooms = function(req, res, next){
+	var agent = ua(req.headers['user-agent']);
+	res.render(agent.Mobile ? 'rooms-m' : 'rooms',{
+		title : 'WUCHAT'
+	});
+};
+
+exports.login = function(req, res){
+	var room  = req.body.room;
+	var username = req.body.username;
 	var agent = ua(req.headers['user-agent']);
 	var client;
 	if(agent.Mobile)
@@ -33,11 +55,16 @@ exports.main = function(req, res){
 			client = 'PC';
 		}
 	}
-	var now = new Date();
-	var user = now.getTime();
-	now.setHours(now.getHours() + 24);
-	var tokenStr = '{"username":'+user+',"expiryTime":'+now.getTime()+',"client":"'+client+'"}';
-	res.cookie('token',secretUtil.aesEncode(tokenStr,config.cookie.password),'/');
-	res.cookie('username',user,'/');
-	res.render(agent.Mobile ? 'chat-m' : 'chat');
+
+	var expiry = new Date();
+	expiry.setHours(expiry.getHours() + 24);
+	var token = {
+		username : username,
+		expiryTime : expiry.getTime(),
+		room : room,
+		client : client
+	};
+	res.cookie('token',secretUtil.aesEncode(JSON.stringify(token),config.cookie.password),'/');
+	res.cookie('username',username,'/');
+	res.redirect('/chat/'+room);
 };
