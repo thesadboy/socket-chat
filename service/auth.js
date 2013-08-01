@@ -8,7 +8,6 @@ exports.isLogin = function(req,res,next){
 	var token;
 	if(cookie.token)
 	{
-		console.log(secretUtil.aesDecode(cookie.token, config.cookie.password));
 		token = JSON.parse(secretUtil.aesDecode(cookie.token, config.cookie.password));
 	}
 	if(!token || token.expiryTime < new Date().getTime())
