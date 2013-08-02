@@ -87,7 +87,11 @@ var systemMsg = function(msg) {
 	$('#system-msg').empty().append(oHtml);
 };
 var getMsg = function(data) {
-	console.log(data);
+	var now = new Date();
+	var time = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+	var html = data.type === 'room' ? '<div class="message-row"><div class="message-header">'+data.from+'['+time+']说：</div><div class="message-content">'+data.msg+'</div></div>' : '<div class="message-row"><div class="message-header">'+data.from+'['+time+']对我说：</div><div class="message-content">'+data.msg+'</div></div>' ;
+	$('#left-content-container').append(html);
+	$('#left-content-container').scrollTop($('#left-content-container')[0].scrollHeight);
 };
 var onlineStatus = function(msg) {
 	var html = '';

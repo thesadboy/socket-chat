@@ -42,8 +42,6 @@ exports.socketUtil = function(socketIo) {
 			client: token.client,
 			room : token.room
 		};
-		console.log('---------------------')
-		console.log(clients);
 		//更新用户列表
 		userList(token.room);
 		//删除待下线用户列表的该条记录
@@ -90,12 +88,11 @@ var userList = function(room) {
 	io.sockets.in(room).emit('userlist', userList);
 };
 var sayToSomone = function(from, to, room, msg){
-	console.log(arguments);
 	clients[to+'@'+room].socket.emit('single',{
 		from : from,
 		msg : msg,
-		to : to
 	});
+	console.log(clients[to+'@'+room]);
 };
 var sayToRoom = function(from, room, msg){
 	io.sockets.in(room).emit('room',{

@@ -1,6 +1,7 @@
 #chat-frame{ position: absolute; left: 0; top: 0; right: 0px; bottom: 0; overflow: hidden; }
 #chat-left{ position: absolute; left: 0; top: 0; right: 0; bottom: 0; }
 #left-main{position: absolute; left: 0; top: 31px; right: 0; bottom: 40px;}
+#left-content-container{position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px; word-wrap: break-word; overflow-y: auto;}
 #left-bottom{position: absolute; left: 0; right: 0; bottom: 0; height: 40px; background: #333;}
 #say-to{position: absolute; left: 5px; top: 5px; bottom: 5px; width: 160px;}
 #say-to .btn{ float: left;padding: 0 5px; margin: 0; height: 30px; line-height: 30px; width: 70px; border-radius: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
@@ -25,3 +26,7 @@
 #home img{ width: 26px; border-radius: 13px; background: #ccc; }
 #current-room{ display: block; float: left; margin: 2px 5px; height: 26px; width: 110px; line-height: 26px; font-size: 16px; font-weight: bold; color: #666; }
 #system-msg{ position: absolute; left: 151px; top: 0; right: 0; height: 30px; line-height: 30px; padding: 0px 10px; font-weight: bold; color: #B94A48; }
+/*user message*/
+.message-row{float: left; width: 100%;}
+.message-header{padding: 5px; background: #ddd; font-weight: bold;}
+.message-content{padding: 10px;}
