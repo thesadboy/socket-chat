@@ -11,7 +11,8 @@ exports.main = function(req, res, next)
 	token.room = room;
 	res.cookie('token',secretUtil.aesEncode(JSON.stringify(token),config.cookie.password),'/');
 	res.render(agent.Mobile ? 'chat-m' : 'chat',{
-		title : '房间：' + room
+		title : '房间：' + room,
+		room : room
 	});
 };
 

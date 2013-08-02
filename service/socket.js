@@ -42,21 +42,12 @@ exports.socketUtil = function(socketIo) {
 			client: token.client,
 			room : token.room
 		};
+		console.log('---------------------')
+		console.log(clients);
 		//更新用户列表
 		userList(token.room);
 		//删除待下线用户列表的该条记录
 		delete lostClients[token.username + '@' + token.room];
-		//自动重连
-		socket.on('reconnect', function() {
-			clients[token.username + '@' + token.room] = {
-				username : token.username,
-				room : token.room,
-				socket: socket,
-				client: token.client
-			};
-			//删除待下线用户列表的该条记录
-			delete lostClients[token.username + '@' + token.room];
-		});
 		socket.on('disconnect', function() {
 			//添加到待下线列表中
 			lostClients[token.username + '@' + token.room] = clients[token.username + '@' + token.room];
@@ -66,10 +57,10 @@ exports.socketUtil = function(socketIo) {
 			}, config.socket.offline_timeout);
 		});
 		socket.on('single',function(data){
-			sayToSomone(data.from, data.to, data.msg);
+			sayToSomone(token.username, data.to, token.room, data.msg);
 		});
-		socket.on('group',function(data){
-			sayToAll(data.from, data.msg);
+		socket.on('room',function(data){
+			sayToRoom(token.username, token.room, data.msg);
 		});
 	});
 };
@@ -98,19 +89,27 @@ var userList = function(room) {
 	userList.reverse();
 	io.sockets.in(room).emit('userlist', userList);
 };
-var sayToSomone = function(from, to, msg){
-	clients[to].emit('single',{
+var sayToSomone = function(from, to, room, msg){
+	console.log(arguments);
+	clients[to+'@'+room].socket.emit('single',{
+		from : from,
+		msg : msg,
+		to : to
+	});
+};
+var sayToRoom = function(from, room, msg){
+	io.sockets.in(room).emit('room',{
 		from : from,
 		msg : msg
 	});
 };
-var sayToAll = function(from, msg){
-	io.sockets.emit('group',{
-		from : from,
-		msg : msg
-	});
-};
-var systemMsg = function(msg){
+var systemMsg = function(room, msg){
+	if(room)
+	{
+		return io.sockets.in(room).emit('system',{
+			msg : msg
+		});
+	}
 	io.sockets.emit('system',{
 		msg : msg
 	});

@@ -12,10 +12,12 @@ socket.on('connect', function() {
 	});
 	socket.on('single', function(data) {
 		//对我聊{from:'',to:'',msg:''}
+		console.log(data);
 		getMsg(data);
 	});
-	socket.on('group', function(data) {
+	socket.on('room', function(data) {
 		//对所有人聊{from:'',msg:''}
+		console.log(data);
 		getMsg(data);
 	});
 });
@@ -28,3 +30,9 @@ socket.on('disconnect', function() {
 socket.on('error', function(err) {
 	systemMsg('[系统]身份验证出错，请从新登录');
 });
+var sayToRoom = function(data){
+	socket.emit('room',data);
+};
+var sayToSomeone = function(data){
+	socket.emit('single',data)
+};

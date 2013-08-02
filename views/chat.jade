@@ -7,9 +7,22 @@ block content
 	script(type='text/javascript', src='/js/socket.js')
 	div#chat-frame
 		div#chat-left
-			div#system-msg
+			div#left-top
+				div#room
+					a#home(href='javascript:', title='点击返回房间列表')
+						img(src='/img/home.png')
+					div#current-room=room
+				div#system-msg
+			div#left-main
+				#left-content-container
+			div#left-bottom
+				div#say-to
+					div.btn.btn-dark#to-room(title='广播消息', to='room') 广播
+					div.btn.btn-dark#to-single(title='', to='-1')
+				input#editor(type='text')
+				div#btn-send.btn 发送
 		div#chat-right
 			div#chat-user-toggle
-				div#chat-user-toggle-btn 好友列表
+				div#chat-user-toggle-btn 人员列表
 			div#chat-user-list
 				ul#list

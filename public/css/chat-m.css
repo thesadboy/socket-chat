@@ -18,5 +18,3 @@
 #chat-user-list #scroller li{ height: 30px; line-height: 30px; position: relative; border-bottom: 1px solid #eee; margin-bottom: 5px; }
 #chat-user-list #scroller li a{ position: absolute; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; left: 0; height: 30px; right: 35px; }
 #chat-user-list #scroller li img{ position: absolute; height: 100%; width: 30px; right: 0;}
-/*system message*/
-#system-msg{ position: absolute; left: 0; top: 0; right: 0; height: 30px; background: whiteSmoke; line-height: 30px; padding: 0px 10px; font-weight: bold; color: #B94A48; }

@@ -1,3 +1,64 @@
+var sendTo = 'room';
+$(function () {
+	$('#chat-user-toggle-btn').click(function (e) {
+		$('#chat-right').toggleClass('chat-right-show');
+	});
+	initSendTo();
+	//切换发送对象
+	$('#say-to div.btn').click(function(e){
+		if($(this).attr('to') == '-1')
+		{
+			return;
+		}
+		$.cookie('send-to', $(this).attr('to'));
+		initSendTo();
+	});
+	//点击主页按钮
+	$('#home').click(function(e){
+		$.cookie('send-to','');
+		window.location.href = '/';
+	});
+	//点击发送按钮
+	$('#btn-send').click(function(e){
+		sendMsg();
+	});
+	//Enter键发送
+	$('#editor').keypress(function(e){
+		if(e.keyCode == 13)
+		{
+			sendMsg();
+		}
+	});
+});
+var sendMsg = function(){
+	var data = {};
+	if(sendTo === 'room')
+	{
+		data.msg = $('#editor').val();
+		sayToRoom(data);
+	}
+	else
+	{
+		data.to = sendTo,
+		data.msg = $('#editor').val();
+		sayToSomeone(data);
+	}
+	$('#editor').val('');
+};
+var initSendTo = function(){
+	//初始化发送对象
+	sendTo = $.cookie('send-to');
+	if($.cookie('send-to') != undefined && $.cookie('send-to').trim() != 'room' && $.cookie('send-to').trim().length > 0)
+	{
+		$('#to-single').attr('to', $.cookie('send-to')).attr('title', 'To: '+ $.cookie('send-to')).html($.cookie('send-to'));
+	}
+	if($('#say-to div.btn[to="'+sendTo+'"]').length < 1)
+	{
+		sendTo = 'room';
+	}
+	$('#say-to div.btn').addClass('btn-dark');
+	$('#say-to div.btn[to="'+sendTo+'"]').removeClass('btn-dark');
+};
 var listUser = function(userList) {
 	//列出用户列表
 	var aHtml = []
@@ -12,6 +73,10 @@ var listUser = function(userList) {
 		aHtml.push('</li>');
 	}
 	var oHtml = $(aHtml.join(''));
+	oHtml.find('a').click(function(){
+		$.cookie('send-to', $(this).attr('title'));
+		initSendTo();
+	});
 	$('#chat-user-list #list').empty().append(oHtml);
 };
 var sayToSomeone = function() {};

@@ -1,12 +1,27 @@
-#chat-frame{ position: absolute; left: 0; top: 5px; right: 0px; bottom: 5px; }
-#chat-left{ position: absolute; left: 0; top: 0; right: 300px; bottom: 0; border-radius: 0 5px 5px 0; border:1px solid #ccc; }
-#chat-right{ position: absolute; top: 0; right: 0; bottom: 0; width: 295px; }
+#chat-frame{ position: absolute; left: 0; top: 0; right: 0px; bottom: 0; overflow: hidden; }
+#chat-left{ position: absolute; left: 0; top: 0; right: 0; bottom: 0; }
+#left-main{position: absolute; left: 0; top: 31px; right: 0; bottom: 40px;}
+#left-bottom{position: absolute; left: 0; right: 0; bottom: 0; height: 40px; background: #333;}
+#say-to{position: absolute; left: 5px; top: 5px; bottom: 5px; width: 160px;}
+#say-to .btn{ float: left;padding: 0 5px; margin: 0; height: 30px; line-height: 30px; width: 70px; border-radius: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#say-to .btn:first-child{border-radius: 5px 0 0 5px;}
+#say-to .btn:last-child{border-radius: 0 5px 5px 0;}
+#editor{position: absolute; left: 170px; right: 70px; top: 5px; bottom: 5px; padding: 5px; line-height: 20px; font-size: 14px; font-weight: bold; outline: none; border: none; background: #fff;border-radius: 5px; }
+#btn-send{margin: 0; padding: 0; position: absolute; right: 5px; bottom: 5px; top: 5px; height: 30px; width: 60px; text-align: center; line-height: 30px; font-size: 16px;}
+#chat-right{ position: absolute; top: 0; right: -295px; bottom: 40px; width: 295px; background: #fff; z-index: 10; -webkit-transition: all .3s linear; -moz-transition: all .3s linear; -ms-transition: all .3s linear; -o-transition: all .3s linear; transition: all .3s linear; }
+.chat-left-show-right{ right: 300px !important; }
+.chat-right-show{ right: 0 !important; }
 /*user list*/
 #chat-user-toggle{ position: absolute; left: -25px; top: 0; bottom: 0; width: 25px; }
-#chat-user-toggle-btn{ position: absolute; top: 50%; margin-top: -38px; left: 0; right: 0; text-align: center; background: #ccc; padding: 10px 2px 10px 3px; border-radius: 10px 0 0 10px; font-weight: bold; }
+#chat-user-toggle-btn{ position: absolute; top: 50%; margin-top: -38px; left: 0; right: 0; text-align: center; background: #ccc; padding: 10px 2px 10px 3px; border-radius: 10px 0 0 10px; font-weight: bold; cursor: pointer; }
 #chat-user-list{ position: absolute; left: 0; top: 0; right: 0; bottom: 0; border:1px solid #ccc; border-radius: 5px 0 0 5px; padding: 10px; }
 #chat-user-list #list li{ height: 30px; line-height: 30px; position: relative; border-bottom: 1px solid #eee; margin-bottom: 5px; }
-#chat-user-list #list li a{ position: absolute; right: 35px; height: 100%;  left: 0;;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#chat-user-list #list li a{ position: absolute; right: 35px; height: 100%; left: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #chat-user-list #list li img{ position: absolute; right: 0; width: 30px; height: 100%; }
-/*system message*/
-#system-msg{ position: absolute; left: 0; top: 0; right: 0; height: 30px; background: whiteSmoke; line-height: 30px; padding: 0px 10px; font-weight: bold; color: #B94A48; }
+/*top*/
+#left-top{ position: absolute; left: 0; top: 0; right: 0; height: 30px; background: whiteSmoke; line-height: 30px; border-bottom: 1px solid #ddd; }
+#room{ position: absolute; left: 0; top: 0; height: 30px; width: 150px; background: #ddd; }
+#home{ margin: 2px; display: block; height: 26px; width: 26px; float: left; }
+#home img{ width: 26px; border-radius: 13px; background: #ccc; }
+#current-room{ display: block; float: left; margin: 2px 5px; height: 26px; width: 110px; line-height: 26px; font-size: 16px; font-weight: bold; color: #666; }
+#system-msg{ position: absolute; left: 151px; top: 0; right: 0; height: 30px; line-height: 30px; padding: 0px 10px; font-weight: bold; color: #B94A48; }
