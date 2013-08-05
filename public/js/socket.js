@@ -14,12 +14,12 @@ socket.on('userlist', function(data) {
 socket.on('single', function(data) {
 	//对我聊{from:'',msg:''}
 	data.type = 'single';
-	getMsg(data);
+	getMsg(data, false);
 });
 socket.on('room', function(data) {
 	//对所有人聊{from:'',msg:''}
 	data.type = 'room'
-	getMsg(data);
+	getMsg(data, false);
 });
 socket.on('reconnect', function() {
 	systemMsg('[系统]您已经重新进入聊天室');

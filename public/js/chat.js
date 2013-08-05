@@ -42,6 +42,7 @@ var sendMsg = function(){
 		data.to = sendTo,
 		data.msg = $('#editor').val();
 		sayToSomeone(data);
+		getMsg(data, true);
 	}
 	$('#editor').val('');
 };
@@ -86,10 +87,18 @@ var systemMsg = function(msg) {
 	oHtml.append(msg);
 	$('#system-msg').empty().append(oHtml);
 };
-var getMsg = function(data) {
+var getMsg = function(data, isLocal) {
 	var now = new Date();
 	var time = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
-	var html = data.type === 'room' ? '<div class="message-row"><div class="message-header">'+data.from+'['+time+']说：</div><div class="message-content">'+data.msg+'</div></div>' : '<div class="message-row"><div class="message-header">'+data.from+'['+time+']对我说：</div><div class="message-content">'+data.msg+'</div></div>' ;
+	var html;
+	if(isLocal)
+	{
+		html = '<div class="message-row"><div class="message-header">我在['+time+']对'+data.to+'说：</div><div class="message-content">'+data.msg+'</div></div>' ;
+	}
+	else
+	{
+		html = data.type === 'room' ? '<div class="message-row"><div class="message-header">'+(data.from==$.cookie("username") ? "我" : data.from )+'在['+time+']说：</div><div class="message-content">'+data.msg+'</div></div>' : '<div class="message-row"><div class="message-header">'+data.from+'在['+time+']对我说：</div><div class="message-content">'+data.msg+'</div></div>' ;
+	}
 	$('#left-content-container').append(html);
 	$('#left-content-container').scrollTop($('#left-content-container')[0].scrollHeight);
 };

@@ -88,11 +88,17 @@ var userList = function(room) {
 	io.sockets.in(room).emit('userlist', userList);
 };
 var sayToSomone = function(from, to, room, msg){
-	clients[to+'@'+room].socket.emit('single',{
-		from : from,
-		msg : msg,
-	});
-	console.log(clients[to+'@'+room]);
+	try{
+		clients[to+'@'+room].socket.emit('single',{
+			from : from,
+			msg : msg,
+		});
+	}catch(e){
+		clients[from+'@'+room].socket.emit('single',{
+			from : 'SYSTEM',
+			msg : '用户“'+to+'"不在线，无法接收消息',
+		});
+	}
 };
 var sayToRoom = function(from, room, msg){
 	io.sockets.in(room).emit('room',{
