@@ -30,6 +30,7 @@ app.use(function(req, res, next) {
 // development only
 if ('development' == app.get('env')) {
 	app.use(express.errorHandler());
+	app.set('port', 82);
 }
 
 var server = http.createServer(app),
